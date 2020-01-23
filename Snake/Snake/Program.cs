@@ -11,9 +11,7 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(80, 25);
-            Console.SetWindowSize(80, 25);
+            
             HLine htop = new HLine(0, 79, 0, '#');
             HLine hbot = new HLine(0, 79, 24, '#');
             VLine vleft = new VLine(0, 24, 0, '#');
@@ -23,15 +21,15 @@ namespace Snake
             vright.Draw();
             vleft.Draw();
             
-            Point hd = new Point(7, 5,'*');
+            Point hd = new Point(8, 5,'*');
             Point tl = new Point(5, 5, '*');
-            Snake snak = new Snake(hd, tl, 3, Dir.left);
+            Snake snak = new Snake(tl, hd, 3, Dir.left);
             snak.Draw();
 
 
-            ConsoleKey e = Console.ReadKey().Key;
+            ConsoleKey e;
             
-            while(e != ConsoleKey.Escape)
+            while(true)
             {
                 e = Console.ReadKey().Key;
                 

@@ -4,3 +4,10 @@ C:\Users\admin\source\repos\Snake\Snake\bin\Debug\Snake.pdb
 C:\Users\admin\source\repos\Snake\Snake\obj\Debug\Snake.csprojAssemblyReference.cache
 C:\Users\admin\source\repos\Snake\Snake\obj\Debug\Snake.exe
 C:\Users\admin\source\repos\Snake\Snake\obj\Debug\Snake.pdb
+C:\Users\stud\Documents\и-71\Snake\Snake\bin\Debug\Snake.exe.config
+C:\Users\stud\Documents\и-71\Snake\Snake\bin\Debug\Snake.exe
+C:\Users\stud\Documents\и-71\Snake\Snake\bin\Debug\Snake.pdb
+C:\Users\stud\Documents\и-71\Snake\Snake\obj\Debug\Snake.csprojAssemblyReference.cache
+C:\Users\stud\Documents\и-71\Snake\Snake\obj\Debug\Snake.csproj.CoreCompileInputs.cache
+C:\Users\stud\Documents\и-71\Snake\Snake\obj\Debug\Snake.exe
+C:\Users\stud\Documents\и-71\Snake\Snake\obj\Debug\Snake.pdb

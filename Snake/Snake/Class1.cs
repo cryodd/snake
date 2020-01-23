@@ -23,10 +23,21 @@ namespace Snake
             sym = _sym;
 
         }
+        public Point(Point p)
+        {
+            x = p.x;
+            y = p.y;
+            sym = p.sym;
+        }
         public void Draw()
         {
             Console.SetCursorPosition(x, y);
             Console.Write(sym);
+        }
+        public void Clear()
+        {
+            sym = ' ';
+            Draw();
         }
 
     }
@@ -79,7 +90,7 @@ namespace Snake
         int len;
         Dir direct;
         Point head;
-        Point start = new Point(5,5,'*');
+        Point start;
         public Snake(Point _tale, Point _head, int length, Dir direction)
         {
             
@@ -87,17 +98,27 @@ namespace Snake
             head = _head;
             len = length;
             direct = direction;
-            for(int tjh = 0; tjh < len; tjh++)
+            Fsnake.Add(_tale);
+            start = new Point(tale.x, tale.y, '*');
+            for (int tjh = 1; tjh < len; tjh++)
             {
-                start = new Point(start.x, 5, '*');
+                start = new Point(start.x, tale.y, '*');
                 Fsnake.Add(start);
                 start.x += 1;
             }
+            Point hed = head;
+            Fsnake.Add(hed);
         }
         public void update()
         {
-            Fsnake.RemoveAt(0);
-            Fsnake.Add(head);
+            Point head = Fsnake[Fsnake.Count - 1];
+            Point tale = Fsnake[0];
+            tale.Clear();
+            Fsnake.Remove(tale);
+            Point pt = new Point(head);
+            Fsnake.Add(pt);
+            
+            
             Draw();
         }
         public void Move(ConsoleKey et)
