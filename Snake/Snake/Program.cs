@@ -20,25 +20,33 @@ namespace Snake
             htop.Draw();
             vright.Draw();
             vleft.Draw();
-            
-            Point hd = new Point(8, 5,'*');
             Point tl = new Point(5, 5, '*');
-            Snake snak = new Snake(tl, hd, 3, Dir.left);
+            Snake snak = new Snake(tl, 3, Dir.right);
             snak.Draw();
-
-
-            ConsoleKey e;
-            
+            Food foodrea = new Food(24, 79, '$');
+            Point food = foodrea.CreateFood();
+            food.Draw();
             while(true)
             {
-                e = Console.ReadKey().Key;
-                
-                snak.Move(e);
-                
+                if (snak.Eat(food))
+                {
+                    food = foodrea.CreateFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snak.Move();
+                }
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snak.cd(key.Key);
+                }
+                Thread.Sleep(200);
+                snak.Move();
             }
 
 
-            Console.ReadLine();
         }
     }
 }

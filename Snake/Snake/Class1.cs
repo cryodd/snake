@@ -39,6 +39,28 @@ namespace Snake
             sym = ' ';
             Draw();
         }
+        public void Move(int i, Dir dir)
+        {
+            switch (dir)
+            {
+                case (Dir.left):
+                    x -= i;
+                    break;
+                case (Dir.right):
+                    x += i;
+                    break;
+                case (Dir.up):
+                    y -= i;
+                    break;
+                case (Dir.down):
+                    y += i;
+                    break;
+            }
+        }
+        public bool isHit(Point p)
+        {
+            return p.x == this.x && p.y == this.y;
+        }
 
     }
     class HLine
@@ -86,67 +108,59 @@ namespace Snake
     class Snake
     {
         List<Point> Fsnake = new List<Point>();
-        Point tale;
-        int len;
         Dir direct;
-        Point head;
-        Point start;
-        public Snake(Point _tale, Point _head, int length, Dir direction)
+        public Snake(Point tale, int length, Dir direction)
         {
-            
-            tale = _tale;
-            head = _head;
-            len = length;
             direct = direction;
-            Fsnake.Add(_tale);
-            start = new Point(tale.x, tale.y, '*');
-            for (int tjh = 1; tjh < len; tjh++)
+            
+            for(int i = 0; i < length; i++)
             {
-                start = new Point(start.x, tale.y, '*');
-                Fsnake.Add(start);
-                start.x += 1;
+                Point p = new Point(tale);
+                p.Move(i, direction);
+                Fsnake.Add(p);
             }
-            Point hed = head;
-            Fsnake.Add(hed);
         }
-        public void update()
+        public void Move()
+        {
+            Point tale = Fsnake[0];
+            Fsnake.Remove(tale);
+            Point head = GetNext();
+            Fsnake.Add(head);
+            tale.Clear();
+            head.Draw();
+        }
+        public Point GetNext()
         {
             Point head = Fsnake[Fsnake.Count - 1];
-            Point tale = Fsnake[0];
-            tale.Clear();
-            Fsnake.Remove(tale);
-            Point pt = new Point(head);
-            Fsnake.Add(pt);
-            
-            
-            Draw();
+            Point nextPoint = new Point(head);
+            nextPoint.Move(1, direct);
+            return nextPoint;
         }
-        public void Move(ConsoleKey et)
+        public void cd(ConsoleKey key)
         {
-            switch (et)
+            switch (key)
             {
                 case ConsoleKey.DownArrow:
-                    head.y += 1;
+                    
                     direct = Dir.down;
-                    update();
+                    
                     break;
                 case ConsoleKey.UpArrow:
-                    head.y -= 1;
+                    
                     direct = Dir.up;
-                    update();
+                    
                     break;
                 case ConsoleKey.RightArrow:
-                    head.x += 1;
+                    
                     direct = Dir.right;
-                    update();
+                    
                     break;
                 case ConsoleKey.LeftArrow:
-                    head.x -= 1;
+                    
                     direct = Dir.left;
-                    update();
+                    
                     break;
             }
-            
         }
         public void Draw()
         {
@@ -155,6 +169,39 @@ namespace Snake
                 
                 pd.Draw();
             }
+        }
+        public bool Eat(Point food)
+        {
+            Point head = GetNext();
+            //if (head.isHit(food))
+            if(head.x ==food.x && head.y == food.y)
+            {
+                food.sym = head.sym;
+                Fsnake.Add(food);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    class Food
+    {
+        int height,width;
+        char sym;
+        Random rand = new Random();
+        public Food(int hei,int wid, char sym)
+        {
+            height = hei;
+            width = wid;
+            this.sym = sym;
+        }
+        public Point CreateFood()
+        {
+            int x = rand.Next(2, width - 2);
+            int y = rand.Next(2, height - 2);
+            return new Point(x, y, sym);
         }
     }
 }
